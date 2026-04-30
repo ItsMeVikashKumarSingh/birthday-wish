@@ -9,7 +9,7 @@
     [flag-cl-end balloon-l-end flag-l-start frame-start] 1fr
     [flag-l-end flag-r-start] 1fr
     [flag-r-end flag-cr-start balloon-r-start frame-end] 1fr [flag-cr-end balloon-r-end];
-  grid-template-rows: auto 1fr; // Let content decide
+  grid-template-rows: 5vh 95vh; // Minimal top space, maximum card space
 
   & > * {
     width: 100%;
@@ -35,10 +35,10 @@
   text-align: center;
 
   @media (max-width: 500px) {
-    justify-content: flex-start; // Start from top to ensure scrolling works naturally
-    padding-top: 1rem;
-    padding-bottom: 5rem; // Space for the next button at bottom
-    gap: 0.6rem; // Even tighter
+    justify-content: flex-start;
+    padding-top: 0; // Start at the very top
+    padding-bottom: 2rem;
+    gap: 0.5rem; // Minimal gap
     overflow-y: auto;
     height: 100%;
     scrollbar-width: none;

@@ -61,8 +61,8 @@
   }
 
   @media (max-width: 800px) {
-    transform: scale(1);
-    margin-top: 2%; // Even higher up
+    transform: scale(0.8); // Shrunken flags
+    margin-top: 0; // Absolute top
   }
 }
 
@@ -74,7 +74,8 @@
   height: 20rem;
   width: 20rem;
   border-radius: 50%;
-  flex-shrink: 0; // Prevent squashing into an oval
+  flex-shrink: 0;
+  aspect-ratio: 1 / 1; // Force a perfect circle
 
   @media (max-width: 800px) {
     height: 35rem;
@@ -82,8 +83,9 @@
   }
 
   @media (max-width: 500px) {
-    height: 17rem; // Optimized size
-    width: 17rem;
+    height: 25vh; // Fluid height based on screen
+    width: 25vh;
+    margin-bottom: 0.5rem;
   }
 }
 
@@ -128,7 +130,7 @@
   width: 90%;
   text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7);
   z-index: 5;
-  margin-top: 0.5rem; // Minimal spacing
+  margin-top: 0; // Removed margin to save space
 }
 
 .HBD {
