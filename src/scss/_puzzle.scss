@@ -74,10 +74,10 @@
             display: block;
             animation: textFocus 0.5s forwards;
             color: #ff69b4;
-            font-size: 1.5rem;
+            font-size: 1.1rem; // Reduced from 1.5rem
             text-shadow: 0 2px 5px rgba(0,0,0,0.2);
             background: rgba(255, 255, 255, 0.95);
-            padding: 8px 15px;
+            padding: 6px 12px; // Slightly tighter padding
             border-radius: 20px;
             white-space: nowrap;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);

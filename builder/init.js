@@ -35,7 +35,7 @@ const setLocalData = async () => {
     }
     genIndex(markup);
   } catch (e) {
-    throw new Error(e.message);
+    throw new Error(`Local initialization failed: ${e.message}`);
   }
 };
 
@@ -61,7 +61,7 @@ const setRemoteData = async () => {
     await setPic(pic);
     genIndex(markup);
   } catch (e) {
-    throw new Error(e.message);
+    throw new Error(`Remote initialization failed: ${e.message}`);
   }
 };
 

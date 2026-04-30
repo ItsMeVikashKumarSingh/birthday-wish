@@ -56,6 +56,14 @@ const celebrate = () => {
   let particles = [];
   const colors = ['#FFD700', '#FFA500', '#FF69B4', '#FF1493', '#FFFFFF'];
   
+  // Pre-render heart to offscreen canvas for massive performance boost
+  const heartCanvas = document.createElement('canvas');
+  heartCanvas.width = 40;
+  heartCanvas.height = 40;
+  const hCtx = heartCanvas.getContext('2d');
+  hCtx.font = '30px serif';
+  hCtx.fillText('❤️', 0, 30);
+  
   class Particle {
     constructor() {
       this.x = canvas.width / 2;
@@ -67,7 +75,7 @@ const celebrate = () => {
       this.gravity = 0.2;
       this.friction = 0.98;
       this.color = colors[Math.floor(Math.random() * colors.length)];
-      this.size = Math.random() * 8 + 2;
+      this.size = Math.random() * 15 + 10; // Slightly larger for better visibility
       this.life = 1;
       this.decay = Math.random() * 0.01 + 0.002;
       this.isHeart = Math.random() > 0.6;
@@ -75,13 +83,12 @@ const celebrate = () => {
 
     draw() {
       ctx.globalAlpha = this.life;
-      ctx.fillStyle = this.color;
       if (this.isHeart) {
-        ctx.font = `${this.size * 2}px serif`;
-        ctx.fillText('❤️', this.x, this.y);
+        ctx.drawImage(heartCanvas, this.x, this.y, this.size, this.size);
       } else {
+        ctx.fillStyle = this.color;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, this.size / 3, 0, Math.PI * 2);
         ctx.fill();
       }
     }
@@ -199,8 +206,10 @@ export const animate = function () {
       haunt.pause();
       blast.play();
       giftroom.style.display = "none";
-      celebrate();
-      transition(flash);
+      button.style.display = "none"; // Hide the gift icon
+      CTAtext.style.display = "none"; // Hide "Click the Gift" text
+      celebrate(); // Magical particle explosion happens here
+      // transition(flash); // Removed old white flash screen!
 
       music.loop = true;
       music.play();
@@ -232,7 +241,7 @@ export const animate = function () {
 
       setTimeout(() => {
         msg.style.transform = "translateY(-100%)";
-        flash.style.display = "none";
+        // flash.style.display = "none"; // No longer needed
       }, 5000);
 
       setTimeout(() => {

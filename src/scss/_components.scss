@@ -61,8 +61,8 @@
   }
 
   @media (max-width: 800px) {
-    transform: scale(1.2);
-    margin-top: 20%;
+    transform: scale(1);
+    margin-top: 2%; // Even higher up
   }
 }
 
@@ -74,6 +74,7 @@
   height: 20rem;
   width: 20rem;
   border-radius: 50%;
+  flex-shrink: 0; // Prevent squashing into an oval
 
   @media (max-width: 800px) {
     height: 35rem;
@@ -81,8 +82,8 @@
   }
 
   @media (max-width: 500px) {
-    height: 20rem;
-    width: 20rem;
+    height: 17rem; // Optimized size
+    width: 17rem;
   }
 }
 
@@ -104,9 +105,9 @@
 }
 
 .cap {
-  @include position(-15%, 50%, 0, 0);
+  @include position(-12%, 50%, 0, 0); // Closer to head
 
-  height: 33.33333333%;
+  height: 30%;
 }
 
 .confetti {
@@ -117,17 +118,17 @@
 }
 
 .cake {
-  @include position(105%);
+  @include position(85%); // Move up more
 
-  height: 60%;
-  width: 60%;
+  height: 45%; // Smaller
+  width: 45%;
 }
 
 .HBD-text {
   width: 90%;
   text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7);
   z-index: 5;
-  margin-top: 2rem; // Added spacing
+  margin-top: 0.5rem; // Minimal spacing
 }
 
 .HBD {
@@ -156,7 +157,7 @@
     font-size: 4.2rem;
   }
   @media (max-width: 500px) {
-    font-size: 3.8rem;
+    font-size: 2.8rem; // Even smaller
   }
 }
 
@@ -175,8 +176,8 @@
   }
 
   @media (max-width: 500px) {
-    height: 80%;
-    font-size: 2.2rem;
+    height: 75%; // Reduced from 80% to ensure next button is visible
+    font-size: 2.1rem;
   }
 }
 
@@ -261,9 +262,7 @@
   background-color: #000;
 }
 
-.flash {
-  background-color: #fff;
-}
+// .flash removed
 
 .giftroom,
 .empty-room {
@@ -386,9 +385,12 @@
 .small-msg {
   font-size: 1.5rem;
   opacity: 0.9;
-  margin-top: 1.5rem;
+  margin-top: 1rem; // Reduced
   color: #fff;
   font-weight: 500;
+  @media (max-width: 500px) {
+    font-size: 1.3rem; // Smaller for mobile
+  }
 }
 
 .bd-pic-2 {
@@ -404,9 +406,12 @@
   font-size: 1.4rem;
   opacity: 0.9;
   font-style: italic;
-  margin-top: 1rem;
+  margin-top: 0.8rem; // Reduced
   color: #ffdae9;
-  max-width: 80%;
+  max-width: 90%; // Wider
+  @media (max-width: 500px) {
+    font-size: 1.2rem; // Smaller for mobile
+  }
 }
 
 .nasa-story {
@@ -481,34 +486,44 @@
     .nasa-pic {
       width: 100%;
       height: auto;
-      max-height: 40vh; // Reduced to fit everything
+      max-height: 32vh; // Further reduced to fit everything
       object-fit: contain;
       border-radius: 12px;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem; // Reduced margin
       box-shadow: 0 10px 40px rgba(0, 204, 255, 0.4);
       display: block;
     }
   }
 }
 .next-btn {
-  background: linear-gradient(135deg, #ff69b4, #da70d6);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: white;
-  border: none;
-  padding: 1rem 2.5rem;
-  font-size: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1.2rem 3rem;
+  font-size: 1.4rem;
   border-radius: 50px;
   cursor: pointer;
-  margin-top: 2rem;
-  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
-  transition: all 0.3s ease;
-  font-family: 'Inter', sans-serif;
-  font-weight: bold;
+  margin-top: 2rem; // Reduced from 2.5rem
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 500px) {
+    margin-top: 1rem; // Even tighter for mobile
+    padding: 1rem 2.5rem;
+  }
+  transition: all 0.4s ease;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
   z-index: 10;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
 
   &:hover {
     transform: scale(1.1) translateY(-3px);
-    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.6);
-    background: linear-gradient(135deg, #ff1493, #8a2be2);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   }
 
   &:active {
@@ -545,38 +560,48 @@
 // MSG CARD BUTTON
 .msg-card-btn {
   display: inline-block;
-  padding: 1.2rem 2.5rem;
-  margin: 1.5rem 0;
-  background: linear-gradient(135deg, #ff69b4, #da70d6);
+  padding: 1rem 2.5rem; // Reduced padding
+  margin: 1.2rem 0; // Reduced margin
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
-  font-size: 1.8rem;
-  font-weight: bold;
-  border-radius: 50px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 16px;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
-  transition: all 0.3s ease;
-  animation: pulse 2s infinite;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: pulse 2.5s infinite;
   z-index: 10;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
 
   &:hover {
-    transform: scale(1.05) translateY(-2px);
-    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+    transform: scale(1.05) translateY(-5px);
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
   }
 
   &.nasa-btn {
-    background: linear-gradient(135deg, #00ccff, #0066ff);
-    box-shadow: 0 5px 15px rgba(0, 204, 255, 0.4);
+    background: rgba(0, 204, 255, 0.15);
+    border: 1px solid rgba(0, 204, 255, 0.3);
+    color: #00ccff;
     
     &:hover {
-      box-shadow: 0 8px 20px rgba(0, 204, 255, 0.6);
+      background: rgba(0, 204, 255, 0.25);
+      border: 1px solid rgba(0, 204, 255, 0.5);
+      box-shadow: 0 12px 40px 0 rgba(0, 204, 255, 0.4);
     }
   }
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.03); }
-  100% { transform: scale(1); }
+  0% { transform: scale(1); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); }
+  50% { transform: scale(1.02); box-shadow: 0 8px 32px 10px rgba(31, 38, 135, 0.2); }
+  100% { transform: scale(1); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); }
 }
 
 // CUSTOM MODAL
@@ -587,11 +612,13 @@
   width: 100%;
   height: 100%;
   z-index: 1000;
-  display: none; // Hidden by default
+  display: none;
   justify-content: center;
   align-items: center;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: all 0.5s ease;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 
   &.active {
     display: flex;
@@ -614,37 +641,34 @@
   width: 90%;
   max-width: 600px;
   height: 80vh;
-  background: #f4e4bc; // Vintage paper color
-  background-image: 
-    radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.05) 100%),
-    url("https://www.transparenttextures.com/patterns/paper.png");
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 24px;
   box-shadow: 
-    0 20px 50px rgba(0,0,0,0.5),
-    inset 0 0 100px rgba(139, 69, 19, 0.2);
+    0 20px 50px rgba(0,0,0,0.3),
+    inset 0 0 100px rgba(255, 255, 255, 0.1);
   padding: 4rem 2rem;
   z-index: 1001;
-  transform: translateY(20px) rotateX(-10deg);
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: translateY(30px) scale(0.95);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 
   .active & {
-    transform: translateY(0) rotateX(0);
+    transform: translateY(0) scale(1);
   }
 
-  &::before, &::after {
+  &::before {
     content: '';
     position: absolute;
+    top: 0;
     left: 0;
     width: 100%;
-    height: 30px;
-    background: #e6d5a7;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    height: 8px;
+    background: linear-gradient(90deg, #ff69b4, #da70d6);
     z-index: 2;
   }
-
-  &::before { top: 0; border-radius: 4px 4px 0 0; }
-  &::after { bottom: 0; border-radius: 0 0 4px 4px; }
 
   &.high-tech {
     background: #0a0a0a;
@@ -675,17 +699,18 @@
   scrollbar-color: #8b4513 rgba(0,0,0,0);
 
   h2 {
-    font-size: 3rem;
-    color: #8b4513;
+    font-size: 3.2rem;
+    color: #1a1a1a;
     text-align: center;
     margin-bottom: 2.5rem;
-    font-family: 'Courgette', cursive;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
   }
 
   .parchment-text {
     font-size: 1.8rem;
     line-height: 1.8;
-    color: #443322;
+    color: #333;
     font-family: 'Inter', sans-serif;
     white-space: pre-line;
     padding-bottom: 2rem;

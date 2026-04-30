@@ -9,7 +9,7 @@
     [flag-cl-end balloon-l-end flag-l-start frame-start] 1fr
     [flag-l-end flag-r-start] 1fr
     [flag-r-end flag-cr-start balloon-r-start frame-end] 1fr [flag-cr-end balloon-r-end];
-  grid-template-rows: 30vh 70vh;
+  grid-template-rows: auto 1fr; // Let content decide
 
   & > * {
     width: 100%;
@@ -29,9 +29,21 @@
   display: none;
   opacity: 0;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center; // More predictable than space-evenly
+  gap: 1.5rem; // Constant spacing
   align-items: center;
   text-align: center;
+
+  @media (max-width: 500px) {
+    justify-content: flex-start; // Start from top to ensure scrolling works naturally
+    padding-top: 1rem;
+    padding-bottom: 5rem; // Space for the next button at bottom
+    gap: 0.6rem; // Even tighter
+    overflow-y: auto;
+    height: 100%;
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
+  }
 }
 
 .page-404 {

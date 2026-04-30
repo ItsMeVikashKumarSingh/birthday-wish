@@ -1,92 +1,89 @@
-# Happy Birthday Card
+# 🎂 Premium Birthday Wish Card
 
-A Customizable Web-based birthday card to wish your friends and family in a unique way.
+A highly interactive, customizable, and premium web-based birthday card to wish
+your friends and family in a unique and memorable way.
 
-Check out the Previews -
+## ✨ Features
 
-- [Without Scroll Message](https://happy-birthday-card.vercel.app/)
-- [With Scroll Message](https://hbd-card.netlify.app/)
+- **Interactive Intro**: A cinematic entry with a customizable message.
+- **NASA Satellite View**: A special section showing a view from space related
+  to the recipient.
+- **Personalized Wishes**: A dedicated space for your heartfelt long-form
+  messages.
+- **Interactive Puzzle**: A fun "Pop the Balloons" game to reveal hidden
+  birthday wishes.
+- **Envelope Finale**: A beautiful CSS-animated envelope containing the final
+  love letter.
+- **Glassmorphism UI**: Modern, sleek design with smooth transitions and
+  animations.
 
-If you liked it, please consider giving it star a 🤩⭐. You can also support me by sponsoring.
+## 🚀 Deployment
 
----
+Choose your favorite platform to deploy your personalized card in seconds.
 
-## How to setup
+### 1. Vercel
 
-Here are the methods to set it up for yourself.
+Easily clone and deploy with all environment variables pre-configured.
 
-### Remote Deployment
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FItsMeVikashKumarSingh%2Fbirthday-wish&env=NAME,PIC,NICKNAME,HBD_MSG,SMALL_MSG,PIC_CAPTION,NASA_INTRO,PIC2,PIC2_CAPTION,WISHES_TITLE,WISHES,SENDER_NAME,SCROLL_MSG,OPEN_DATE&project-name=my-birthday-wish&repo-name=birthday-wish)
 
-- Vercel Deploy
+### 2. Netlify
 
-   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAnshumanMahato%2FHappy-Birthday-Card&env=NAME,PIC&envDescription=NAME%20-%3E%20Name%20of%20the%20Receiver%20%7C%20PIC%20-%3E%20web%20url%20of%20a%20picture%20of%20the%20receiver&envLink=https%3A%2F%2Fgithub.com%2FAnshumanMahato%2FHappy-Birthday-Card%2Fblob%2Fmain%2Fdocs%2Fvariables.md&project-name=happy-birthday-card&repo-name=happy-birthday-card&demo-title=Happy%20Birthday%20Card&demo-description=This%20is%20a%20web%20based%20interactive%20birthday%20card.&demo-url=https%3A%2F%2Fhappy-birthday-card.vercel.app%2F&demo-image=https%3A%2F%2Ftelegra.ph%2Ffile%2Fac886529ccc3843552f81.png)
+One-click deployment to Netlify.
 
-- Netlify Deploy
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ItsMeVikashKumarSingh/birthday-wish)
 
-   [![Deploy with NEtlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/AnshumanMahato/Happy-Birthday-Card)
+### 3. Cloudflare Pages
 
-Remote deployment will require you to specify some mandatory environmental variables,
+To deploy on Cloudflare Pages:
 
-- NAME: Name of the receiver.
-- PIC: Url of the pic to be loaded in the card. If don't have the image hosted somewhere, you may publish a [telegra.ph article](https://telegra.ph) with your image and copy the image address from there.
-
-To know more about the environment variables, check [References](#references).
-
-### For Local Building
-
-1. Clone the repository
-
-```sh
-git clone https://github.com/AnshumanMahato/Happy-Birthday-Card
-
-```
-
-2. Install dependencies
-
-```sh
-npm install
-
-```
-
-3. Add a pic of the receiver, in the `./local` directory. Ensure that the image is of a 1:1 ratio or it might get cropped and squished.
-
-4. Create a `.env` file in the root directory, and add the following lines.
-
-```env
- NAME='Name of the Receiever'
- PIC='name-of-image.extension'
-
-```
-
-5. Execute the following commands in order.
-
-```sh
- npm run init-index-local
- npm run build:parcel
-
-```
-
-6. Upon Successful execution, your built files will be ready in the `./dist` directory. Serve this directory using `live-server` or similar tools to see your card.
-
-For further customization, check out [here](./docs/customizations.md).
+1. Log in to the [Cloudflare Dashboard](https://dash.cloudflare.com/).
+2. Navigate to **Workers & Pages** > **Create application** > **Pages** >
+   **Connect to Git**.
+3. Select this repository.
+4. Set the **Build command** to: `npm run build`
+5. Set the **Build output directory** to: `dist`
+6. Add your environment variables in **Settings** > **Environment variables**.
 
 ---
 
-## References
+## 🛠️ Local Setup
+
+1. **Clone the repository**
+   ```sh
+   git clone https://github.com/ItsMeVikashKumarSingh/birthday-wish.git
+   ```
+
+2. **Install dependencies**
+   ```sh
+   npm install
+   ```
+
+3. **Configure Environment** Create a `.env` file in the root directory. Refer
+   to [Environment Variables](./docs/variables.md) for a full list of options.
+   ```env
+   NAME='Recipient Name'
+   PIC='my-image.jpg' # Place image in ./local/
+   SENDER_NAME='Your Name'
+   ```
+
+4. **Build and Run**
+   ```sh
+   npm run init-index-local
+   npm run build:parcel
+   ```
+   Open `dist/index.html` to view your card.
+
+---
+
+## 📖 Documentation
 
 - [Environment Variables](./docs/variables.md)
+- [Customization Guide](./docs/customizations.md)
 - [Attributions](./docs/attributions.md)
 
 ---
 
-## Support
-
-If you have any queries or need some help in deployment, you may contact me here
-
-- [Telegram](https://t.me/AnshumanMahato)
-- [Email](mailto:rcoder.bytes@gmail.com)
-
 <div align="center">
-Made with 💖 by Anshuman Mahato
+Made with 💖 by **Vikash Kumar Singh**
 </div>
-
