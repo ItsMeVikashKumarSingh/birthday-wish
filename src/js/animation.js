@@ -46,6 +46,76 @@ const readMsg = (text) => {
   }
 };
 
+const celebrate = () => {
+  const canvas = document.getElementById('confetti-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let particles = [];
+  const colors = ['#FFD700', '#FFA500', '#FF69B4', '#FF1493', '#FFFFFF'];
+  
+  class Particle {
+    constructor() {
+      this.x = canvas.width / 2;
+      this.y = canvas.height / 2;
+      this.vx = (Math.random() - 0.5) * 35;
+      this.vy = (Math.random() - 0.5) * 35 - 8;
+      this.gravity = 0.35;
+      this.friction = 0.99;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.size = Math.random() * 8 + 2;
+      this.life = 1;
+      this.decay = Math.random() * 0.02 + 0.005;
+      this.isHeart = Math.random() > 0.7;
+    }
+
+    draw() {
+      ctx.globalAlpha = this.life;
+      ctx.fillStyle = this.color;
+      if (this.isHeart) {
+        ctx.font = `${this.size * 2}px serif`;
+        ctx.fillText('❤️', this.x, this.y);
+      } else {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    update() {
+      this.vx *= this.friction;
+      this.vy *= this.friction;
+      this.vy += this.gravity;
+      this.x += this.vx;
+      this.y += this.vy;
+      this.life -= this.decay;
+    }
+  }
+
+  for (let i = 0; i < 150; i++) {
+    particles.push(new Particle());
+  }
+
+  const animateParticles = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles = particles.filter(p => p.life > 0);
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+
+    if (particles.length > 0) {
+      requestAnimationFrame(animateParticles);
+    } else {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  };
+
+  animateParticles();
+};
+
 // transition() is animation for change from one scene to another. It takes the current scene div element as input.
 
 const transition = (currentScene) => {
@@ -126,6 +196,7 @@ export const animate = function () {
       haunt.pause();
       blast.play();
       giftroom.style.display = "none";
+      celebrate();
       transition(flash);
 
       music.loop = true;
@@ -171,6 +242,72 @@ export const animate = function () {
         frames[0].style.display = "flex";
         frames[0].classList.add("appear");
         frames[0].style.opacity = "1";
+
+        frames[0].classList.add("appear");
+        frames[0].style.opacity = "1";
+
+        // Navigation for HBD -> NASA
+        document.getElementById("nextToNasa").onclick = () => {
+          frames[0].classList.add("fade-out");
+          setTimeout(() => {
+            frames[0].style.display = "none";
+            const nasaFrame = document.querySelector(".frame-nasa");
+            nasaFrame.style.display = "flex";
+            nasaFrame.classList.add("appear");
+            
+            const pic2 = document.querySelector(".bd-pic-2");
+            if (pic2) {
+                pic2.style.display = "block";
+                pic2.classList.add("fade-in");
+            }
+          }, 1500);
+        };
+
+        // Navigation for NASA -> Wishes
+        document.getElementById("nextToWishes").onclick = () => {
+          const nasaFrame = document.querySelector(".frame-nasa");
+          nasaFrame.classList.add("fade-out");
+          setTimeout(() => {
+            nasaFrame.style.display = "none";
+            const wishesFrame = document.querySelector(".frame-wishes");
+            wishesFrame.style.display = "flex";
+            wishesFrame.classList.add("appear");
+          }, 1500);
+        };
+
+        // Navigation for Wishes -> Puzzle
+        document.getElementById("nextToPuzzle").onclick = () => {
+          const wishesFrame = document.querySelector(".frame-wishes");
+          wishesFrame.classList.add("fade-out");
+          setTimeout(() => {
+            wishesFrame.style.display = "none";
+            import('./puzzle.js').then(m => m.startPuzzle());
+          }, 1500);
+        };
+
+        // Modal Toggle Logic
+        const setupModal = (openId, modalId, closeIds) => {
+          const openBtn = document.getElementById(openId);
+          const modal = document.getElementById(modalId);
+          
+          if (openBtn && modal) {
+            openBtn.onclick = () => {
+              modal.classList.add('active');
+            };
+            
+            closeIds.forEach(id => {
+              const closeBtn = document.getElementById(id);
+              if (closeBtn) {
+                closeBtn.onclick = () => {
+                  modal.classList.remove('active');
+                };
+              }
+            });
+          }
+        };
+
+        setupModal('openMsgModal', 'msgModal', ['closeMsgModal', 'closeMsgModalOverlay']);
+        setupModal('openNasaModal', 'nasaModal', ['closeNasaModal', 'closeNasaModalOverlay']);
       }, (readTime + 3) * 1000);
     }
   });

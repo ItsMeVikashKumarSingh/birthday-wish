@@ -1,7 +1,7 @@
 const axios = require("axios").default;
 const path = require("path");
 const fs = require("fs");
-const setPic = require("./getPic");
+const { setPic, setPic2 } = require("./getPic");
 const genIndex = require("./genIndex");
 const {
   generateMarkupLocal,
@@ -20,6 +20,7 @@ const msgPath = process.env.SCROLL_MSG;
 const setLocalData = async () => {
   try {
     const pic = path.join(__dirname, "../local/", picPath);
+    const pic2Path = process.env.PIC2;
     let markup = "";
     if (msgPath) {
       const text = fs.readFileSync(path.join(__dirname, "../local/", msgPath), {
@@ -28,6 +29,10 @@ const setLocalData = async () => {
       markup = generateMarkupLocal(text);
     }
     await setPic(pic);
+    if (pic2Path) {
+      const pic2 = path.join(__dirname, "../local/", pic2Path);
+      await setPic2(pic2);
+    }
     genIndex(markup);
   } catch (e) {
     throw new Error(e.message);

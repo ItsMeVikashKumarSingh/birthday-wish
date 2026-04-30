@@ -1,0 +1,234 @@
+.love-letter-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #8b0000;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courgette', cursive;
+    overflow: hidden;
+
+    .munna-finale {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+:root {
+    --envelope-x: 300px;
+    --envelope-y: 200px;
+    --envelope-bg: #ffe4b5; // Moccasin
+    --envelope-shadow: #cd853f; // Peru
+    --letter-x: 250px;
+    --letter-y: 230px;
+    --letter-bg: #faebd7; // AntiqueWhite
+    --letter-shadow: #deb887; // BurlyWood
+    --letter-text: #180d07;
+    --heart-bg: #8b0000;
+}
+
+@media (min-width: 650px) {
+    :root {
+        --envelope-x: 600px;
+        --envelope-y: 400px;
+        --letter-x: 500px;
+        --letter-y: 350px;
+    }
+}
+
+.cssletter {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.envelope {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: var(--envelope-x);
+    height: var(--envelope-y);
+    background: var(--envelope-bg);
+    transition: transform 0.6s ease;
+
+    .click-hint {
+        position: absolute;
+        bottom: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        text-align: center;
+        color: white;
+        font-size: 1.2rem;
+        animation: pulse 1.5s infinite;
+        white-space: nowrap;
+        font-family: 'Inter', sans-serif;
+    }
+
+    &.active {
+        .click-hint { display: none; }
+        .envelope-flap {
+            transform: rotateX(-180deg);
+            z-index: 1;
+        }
+        .heart {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+}
+
+.envelope-flap {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 3;
+    background: var(--envelope-bg);
+    clip-path: polygon(0 0, 100% 0, 50% 61%);
+    transform-origin: top;
+    transition: 0.6s ease all;
+    display: flex;
+    justify-content: center;
+
+    .munna-flap-text {
+        position: absolute;
+        top: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #333;
+
+        .munna-label { font-size: 0.8rem; opacity: 0.7; }
+        .munna-name { font-size: 1.2rem; font-weight: bold; }
+    }
+}
+
+.envelope-folds {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: var(--envelope-bg);
+    clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.1);
+}
+
+.heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    width: 50px;
+    height: 50px;
+    background: var(--heart-bg);
+    clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .heart-text {
+        color: white;
+        font-size: 0.7rem;
+        margin-top: -5px;
+    }
+}
+
+.letter {
+    position: absolute;
+    width: var(--letter-x);
+    height: var(--letter-y);
+    background: var(--letter-bg);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 0;
+    transition: 0.5s ease;
+    opacity: 0;
+    transform: translateY(50px);
+
+    p { font-size: 1.3rem; color: var(--letter-text); line-height: 1.5; }
+    cite { display: block; margin-top: 15px; font-style: italic; color: #666; font-size: 1.1rem; }
+
+    .next-letter-btn {
+        background: #8b0000;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        margin-top: 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: 'Inter', sans-serif;
+        transition: 0.3s;
+        &:hover { background: #ff0000; }
+    }
+}
+
+#lettersContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .letter { 
+        pointer-events: auto; 
+        position: relative;
+        transform: translateY(50px);
+        &.show {
+            transform: translateY(0) rotate(var(--rot, 0deg));
+            opacity: 1;
+        }
+    }
+}
+
+.heart-container {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+
+    &.top-heart { top: 10%; left: 10%; }
+    &.bottom-heart { bottom: 10%; right: 10%; }
+
+    .heartBeating {
+        width: 100%;
+        height: 100%;
+        animation: heartbeat 1.5s infinite;
+    }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.1); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.15); }
+    60% { transform: scale(1); }
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+    100% { opacity: 0.5; transform: scale(1); }
+}

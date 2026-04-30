@@ -73,11 +73,15 @@
   display: none;
 }
 .fade-in {
-  animation: fade 2s ease-in 0s;
+  animation: fade 2s ease-in 0s reverse forwards;
 }
 
 .appear {
-  animation: fade 2s linear 0s 1 reverse;
+  animation: fade 1.5s linear 0s 1 reverse forwards;
+}
+
+.fade-out {
+  animation: fade 1.5s linear 0s 1 forwards;
 }
 
 .read {

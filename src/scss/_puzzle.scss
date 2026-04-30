@@ -1,0 +1,85 @@
+.puzzle-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #141852;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+
+    .puzzle-container {
+        width: 90%;
+        max-width: 600px;
+
+        h2 { font-size: 2rem; margin-bottom: 10px; color: #ff69b4; }
+        p { margin-bottom: 30px; opacity: 0.8; }
+    }
+
+    .balloon-garden {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        perspective: 1000px;
+    }
+}
+
+.puzzle-balloon {
+    width: 60px;
+    height: 70px;
+    background: #ff4757;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset -5px -5px 15px rgba(0,0,0,0.2);
+
+    &:hover { transform: scale(1.1) translateY(-5px); }
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 10px solid inherit;
+    }
+
+    .balloon-message {
+        display: none;
+        font-size: 0.8rem;
+        color: white;
+        font-weight: bold;
+    }
+
+    &.popped {
+        animation: pop 0.3s forwards;
+        pointer-events: none;
+
+        .balloon-message {
+            display: block;
+            animation: fadeIn 0.3s forwards;
+        }
+    }
+}
+
+@keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+}

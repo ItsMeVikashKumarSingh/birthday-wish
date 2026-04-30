@@ -47,6 +47,9 @@
     <script src="./js/index.js" type="module" defer></script>
 
     <!-- some extensions -->
+    <script>
+      window.SENDER_NAME = "{{^SENDER_NAME}}";
+    </script>
   </head>
   <body>
     <!-- Sfx calling -->
@@ -73,6 +76,13 @@
     </audio>
 
     <div class="content">
+      <div class="celebration-bg">
+        <div class="floating-heart" style="left: 10%; animation-delay: 0s;">❤</div>
+        <div class="floating-heart" style="left: 30%; animation-delay: 2s;">💖</div>
+        <div class="floating-heart" style="left: 50%; animation-delay: 4s;">💝</div>
+        <div class="floating-heart" style="left: 70%; animation-delay: 1s;">💗</div>
+        <div class="floating-heart" style="left: 90%; animation-delay: 3s;">💓</div>
+      </div>
       <img
         src="./resources/img/flag-right.png"
         alt="flags"
@@ -106,6 +116,7 @@
       <div class="frame">
         <div class="img-back">
           <div class="bd-pic"></div>
+          <img class="bd-pic-2" src="./pic2.jpeg" alt="" style="display:none;" />
           <img class="cap" src="./resources/img/bday-cap.svg" alt="" />
           <img class="confetti" src="./resources/img/confetti.svg" alt="" />
           <img class="cake" src="./resources/img/cake.svg" alt="" />
@@ -118,18 +129,64 @@
           </div>
         </div>
         <div class="HBD-text">
-          <p class="HBD">{{^HBD_MSG}}</p>
           <p class="nickname">{{^NICKNAME}}</p>
+          <div class="msg-card-btn" id="openMsgModal">Read my message 💌</div>
+          <p class="pic-caption">{{^PIC_CAPTION}}</p>
+          <p class="small-msg">{{^SMALL_MSG}}</p>
         </div>
+        <button class="next-btn" id="nextToNasa">Next ➔</button>
       </div>
 
       <div class="frame frame2">
         <div class="scroll">
           <div class="text">{{^SCROLL_MSG}}</div>
+        </div>
+      </div>
+
+      <div class="frame frame-nasa" style="display:none;">
+        <div class="nasa-container">
+          <h2>A View from Space</h2>
+          <div class="nasa-intro">{{^NASA_INTRO}}</div>
+          <img class="nasa-pic" src="./pic2.jpeg" alt="Space View" />
+          <div class="msg-card-btn nasa-btn" id="openNasaModal">View satellite details 🛰️</div>
+        </div>
+        <button class="next-btn" id="nextToWishes">Next ➔</button>
+      </div>
+
+      <div class="frame frame-wishes" style="display:none;">
+        <div class="wishes-container">
+          <h2>{{^WISHES_TITLE}}</h2>
+          <div class="wishes-text">{{^WISHES}}</div>
+        </div>
+        <button class="next-btn" id="nextToPuzzle">Next ➔</button>
+      </div>
+
+    <!-- Birthday Message Modal -->
+    <div class="custom-modal" id="msgModal">
+      <div class="modal-overlay" id="closeMsgModalOverlay"></div>
+      <div class="parchment">
+        <button class="close-modal" id="closeMsgModal">&times;</button>
+        <div class="parchment-content">
+          <h2>For You...</h2>
+          <div class="parchment-text">{{^HBD_MSG}}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NASA Story Modal -->
+    <div class="custom-modal" id="nasaModal">
+      <div class="modal-overlay" id="closeNasaModalOverlay"></div>
+      <div class="parchment high-tech">
+        <button class="close-modal" id="closeNasaModal">&times;</button>
+        <div class="parchment-content">
+          <h2>Satellite Data Log</h2>
+          <div class="parchment-text">{{^PIC2_CAPTION}}</div>
+        </div>
       </div>
     </div>
 
     <div class="flash"></div>
+    <canvas id="confetti-canvas"></canvas>
 
     <div class="giftroom">
       <p class="gift-text">Wow! That was something weird.</p>
@@ -160,5 +217,52 @@
 
     <div class="btn switch"></div>
     <div class="btn-ref"></div>
+
+    <!-- Puzzle Section -->
+    <div class="puzzle-section" style="display: none;">
+      <div class="puzzle-container">
+        <h2>Unwrap your wishes!</h2>
+        <p>Pop the balloons to find the hidden messages...</p>
+        <div class="balloon-garden" id="balloonGarden"></div>
+      </div>
+    </div>
+
+    <!-- Love Letter Section (Finale) -->
+    <div class="love-letter-section" style="display: none;">
+      <main class='munna-finale'>
+        <section class="munna cssletter z-10">
+          <div class="envelope" id="envelope">
+            <button class="munna heart" id="openEnvelope">
+              <span class="munna heart-text">Open</span>
+            </button>
+            <span class="click-hint">Click the heart to open 🤍</span>
+            <div class="munna envelope-flap">
+              <div class='munna-flap-text'>
+                <span class='munna-label'>Envelope Of Love</span>
+                <span class='munna-name'>Dear {{^NAME}}</span>
+              </div>
+            </div>
+            <div class="munna envelope-folds">
+              <div class="munna envelope-left"></div>
+              <div class="munna envelope-right"></div>
+              <div class="munna envelope-bottom"></div>
+            </div>
+          </div>
+          <div class="munna letters" id="lettersContainer"></div>
+        </section>
+
+        <!-- Heart Beating -->
+        <div class="munna heart-container top-heart">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="munna heartBeating">
+            <path d="M471.7 73.6c-54.5-46.4-136-38.3-186.4 15.8L256 120.6l-29.3-31.2C176.3 35.3 94.8 27.2 40.3 73.6-18 125.4-13.3 221 43 273.7l187.3 177.6a24 24 0 0032.4 0L469 273.7c56.3-52.8 61-148.3 2.7-200.1z" fill="#b10505" />
+          </svg>
+        </div>
+        <div class="munna heart-container bottom-heart">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="munna heartBeating">
+            <path d="M471.7 73.6c-54.5-46.4-136-38.3-186.4 15.8L256 120.6l-29.3-31.2C176.3 35.3 94.8 27.2 40.3 73.6-18 125.4-13.3 221 43 273.7l187.3 177.6a24 24 0 0032.4 0L469 273.7c56.3-52.8 61-148.3 2.7-200.1z" fill="#b10505" />
+          </svg>
+        </div>
+      </main>
+    </div>
   </body>
 </html>
