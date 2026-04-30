@@ -28,6 +28,16 @@ export const startPuzzle = () => {
 
         balloon.addEventListener('click', () => {
             if (!balloon.classList.contains('popped')) {
+                // Hide previously popped messages
+                document.querySelectorAll('.balloon-message').forEach(m => {
+                    if (m !== msgSpan && m.parentElement.classList.contains('popped')) {
+                        m.style.animation = 'none'; 
+                        m.style.opacity = '0'; 
+                        m.style.transform = 'scale(0.8) translateY(-10px)';
+                        m.style.transition = 'all 0.3s ease';
+                    }
+                });
+
                 balloon.classList.add('popped');
                 poppedCount++;
                 

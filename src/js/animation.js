@@ -60,15 +60,17 @@ const celebrate = () => {
     constructor() {
       this.x = canvas.width / 2;
       this.y = canvas.height / 2;
-      this.vx = (Math.random() - 0.5) * 35;
-      this.vy = (Math.random() - 0.5) * 35 - 8;
-      this.gravity = 0.35;
-      this.friction = 0.99;
+      this.angle = Math.random() * Math.PI * 2;
+      this.spin = (Math.random() - 0.5) * 0.2;
+      this.vx = (Math.random() - 0.5) * 25;
+      this.vy = (Math.random() - 0.5) * 25 - 10;
+      this.gravity = 0.2;
+      this.friction = 0.98;
       this.color = colors[Math.floor(Math.random() * colors.length)];
       this.size = Math.random() * 8 + 2;
       this.life = 1;
-      this.decay = Math.random() * 0.02 + 0.005;
-      this.isHeart = Math.random() > 0.7;
+      this.decay = Math.random() * 0.01 + 0.002;
+      this.isHeart = Math.random() > 0.6;
     }
 
     draw() {
@@ -88,7 +90,8 @@ const celebrate = () => {
       this.vx *= this.friction;
       this.vy *= this.friction;
       this.vy += this.gravity;
-      this.x += this.vx;
+      this.angle += this.spin;
+      this.x += this.vx + Math.sin(this.angle) * 3; // Flutter effect
       this.y += this.vy;
       this.life -= this.decay;
     }

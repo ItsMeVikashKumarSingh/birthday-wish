@@ -195,11 +195,16 @@
 
     .letter { 
         pointer-events: auto; 
-        position: relative;
+        position: absolute; // Stack letters on top of each other
         transform: translateY(50px);
         &.show {
             transform: translateY(0) rotate(var(--rot, 0deg));
             opacity: 1;
+        }
+        &.swipe-out {
+            transform: translateY(120vh) rotate(calc(var(--rot, 0deg) - 30deg)); // Fall below screen with a spin
+            opacity: 0;
+            transition: transform 0.8s cubic-bezier(0.55, 0.085, 0.68, 0.53), opacity 0.6s ease; // Smooth falling curve
         }
     }
 }

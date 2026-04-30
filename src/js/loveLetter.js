@@ -51,26 +51,56 @@ export const startLoveLetter = () => {
         letter.innerHTML = `
             <p>${msg}</p>
             <cite>${window.SENDER_NAME || 'With Love'}</cite>
-            <button class="next-letter-btn">Next Message ➔</button>
+            <span style="font-size: 0.8rem; color: #888; margin-top: 20px; font-style: italic;">(Swipe to next)</span>
         `;
         
         // Random rotation
         const rot = (Math.random() - 0.5) * 5;
         letter.style.setProperty('--rot', `${rot}deg`);
         
-        lettersContainer.innerHTML = ''; // Clear previous
+        // lettersContainer.innerHTML = ''; // Do NOT clear, we want to see the old one fall away
         lettersContainer.appendChild(letter);
         
         setTimeout(() => {
             letter.classList.add('show');
         }, 100);
 
-        letter.querySelector('.next-letter-btn').onclick = () => {
+        // Swipe logic
+        let startY = 0;
+        let startX = 0;
+
+        const triggerNext = () => {
+            if (!letter.classList.contains('show')) return;
             letter.classList.remove('show');
+            letter.classList.add('swipe-out'); 
+            
             setTimeout(() => {
-                currentMsgIndex++;
-                showNextLetter();
-            }, 500);
+                letter.remove(); 
+            }, 800);
+
+            currentMsgIndex++;
+            showNextLetter();
         };
+
+        const handleSwipe = (e) => {
+            const endY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+            const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+            
+            if (Math.abs(endY - startY) > 30 || Math.abs(endX - startX) > 30) {
+                triggerNext();
+            }
+        };
+
+        letter.addEventListener('touchstart', e => {
+            startY = e.touches[0].clientY;
+            startX = e.touches[0].clientX;
+        });
+        letter.addEventListener('touchend', handleSwipe);
+
+        letter.addEventListener('mousedown', e => {
+            startY = e.clientY;
+            startX = e.clientX;
+        });
+        letter.addEventListener('mouseup', handleSwipe);
     };
 };
