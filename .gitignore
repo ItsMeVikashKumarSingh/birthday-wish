@@ -6,3 +6,9 @@ dist/
 temp/
 src/index.html
 src/pic.jpeg
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
